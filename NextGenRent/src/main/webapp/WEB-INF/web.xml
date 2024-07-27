@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
+  <display-name>NextGenRent</display-name>
+  <welcome-file-list>
+    <welcome-file>index.htm</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>NextGenRentServlet</display-name>
+    <servlet-name>NextGenRentServlet</servlet-name>
+    <servlet-class>apprepo.NextGenRentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NextGenRentServlet</servlet-name>
+    <url-pattern>/NextGenRentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FilterServlet</display-name>
+    <servlet-name>FilterServlet</servlet-name>
+    <servlet-class>apprepo.FilterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FilterServlet</servlet-name>
+    <url-pattern>/FilterServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

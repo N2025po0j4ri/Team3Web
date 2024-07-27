@@ -1,0 +1,13 @@
+Name: Application 1
+Description: Description of Application 1.
+Organization: Organization A
+Platforms: Windows (10), macOS (11)
+Links: [Link to store 1], [Link to store 2]
+Price: $9.99
+
+Name: Application 2
+Description: Description of Application 2.
+Organization: Organization B
+Platforms: Linux (Ubuntu 20.04)
+Links: [Link to store 3]
+Price: Free

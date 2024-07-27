@@ -1,0 +1,59 @@
+<project name="NextGenRent" default="deploy" basedir=".">
+
+    <!-- Define properties -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="web.dir" value="C:/Users/yogit/eclipse_workspace2/webapp"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="lib.dir" value="C:/Program Files/Apache Software Foundation/Tomcat 10.1/lib"/>
+    <property name="servlet.jar" value="${lib.dir}/servlet-api.jar"/>
+    <property name="war.file" value="${dist.dir}/NextGenRent.war"/>
+
+    <!-- Initialize the build directory -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <!-- Clean the build and dist directories -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- Compile the Java source files -->
+    <target name="compile" depends="init">
+        <mkdir dir="${build.dir}/WEB-INF/classes"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}/WEB-INF/classes" classpath="${servlet.jar}">
+            <include name="**/*.java"/>
+        </javac>
+    </target>
+
+    <!-- Create the WAR file -->
+    <target name="war" depends="compile">
+        <war destfile="${war.file}" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${build.dir}">
+                <include name="**/*"/>
+            </fileset>
+            <lib dir="${lib.dir}"/>
+        </war>
+    </target>
+
+    <!-- Deploy the WAR file to Tomcat (assuming Tomcat is installed in /path/to/tomcat) -->
+    <target name="deploy" depends="war">
+        <echo message="Deploying ${war.file} to Tomcat"/>
+        <copy file="${war.file}" todir="/path/to/tomcat/webapps"/>
+    </target>
+
+    <!-- Run the project (customize as needed) -->
+    <target name="run">
+        <echo message="Running the project..."/>
+        <echo message="Please ensure Tomcat is started manually or through other scripts."/>
+    </target>
+
+    <!-- Default target -->
+    <target name="default" depends="clean, compile, war, deploy">
+        <echo message="Build, package, and deploy complete."/>
+    </target>
+
+</project>

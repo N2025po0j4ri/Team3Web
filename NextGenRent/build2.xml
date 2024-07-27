@@ -1,0 +1,59 @@
+<project name="NextGenRent" default="compile" basedir=".">
+
+    <!-- Define properties -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+	<property name="doc.dir" value="doc"/>
+    <property name="web.dir" value="./src/main/webapp"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="war.file" value="${dist.dir}/NextGenRent.war"/>
+	<property name="lib.dir" value="${web.dir}/WEB-INF/lib"/>
+	<property name="servlet.jar" value="${lib.dir}/servlet-api.jar"/>
+	<property name="server.dir" value="C:/Program Files/Apache Software Foundation/Tomcat 10.1/lib"/>
+	
+    <!-- Initialize the build directory -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    	<mkdir dir="${doc.dir}"/>
+    </target>
+
+    <!-- Clean the build and dist directories -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- Compile the Java source files -->
+    <target name="compile" depends="init">
+        <mkdir dir="${build.dir}/WEB-INF/classes"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}/WEB-INF/classes" classpath="${servlet.jar}">
+            <include name="**/*.java"/>
+        </javac>
+    </target>
+	<!-- Create the WAR file -->
+	    <target name="war" depends="compile">
+	    	<war destfile = "${war.file}" webxml = "${web.dir}/WEB-INF/web.xml">
+	    		<fileset dir="${build.dir}">
+	                <include name="**/*"/>
+	            </fileset>
+	            <lib dir="${lib.dir}"/>
+	    	   </war>
+	    </target>
+	
+	 
+	
+	<target name="doc" depends="init" description="generate documentation">
+	  <javadoc 
+	       destdir="${doc.dir}"
+	       access="private"
+	       author="yes"
+	       linksource="yes"
+	  	   classpath="${servlet.jar}" >
+	    <fileset dir= "${src.dir}" includes="**/*.java" />  
+	  	<fileset dir="${lib.dir}" includes="**/*.java" />
+	  	    
+	  </javadoc>
+	</target>
+
+</project>
